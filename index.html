@@ -79,8 +79,12 @@
   .hero-veil{
     position:absolute;inset:0;
     background:
-      linear-gradient(to top, rgba(6,6,5,.97) 0%, rgba(6,6,5,.82) 38%, rgba(6,6,5,.62) 100%),
-      linear-gradient(to right, rgba(6,6,5,.72) 0%, rgba(6,6,5,.25) 70%);
+      /* The veil was tuned to bury a screenshot. The background is
+         drawn now, so it only needs to protect the two places type
+         actually sits: the left column and the strip along the
+         bottom. The right side is left open so the animation reads. */
+      linear-gradient(to top, rgba(6,6,5,.92) 0%, rgba(6,6,5,.52) 42%, rgba(6,6,5,.10) 100%),
+      linear-gradient(to right, rgba(6,6,5,.66) 0%, rgba(6,6,5,.18) 52%, rgba(6,6,5,0) 78%);
   }
   .hero h1 em{font-style:normal;}
   .hero-inner{
@@ -394,8 +398,8 @@
 .hero-bg::before{
   content:"";position:absolute;inset:-60px;
   background-image:
-    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+    linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
   background-size:58px 58px;
   mask-image:radial-gradient(ellipse 85% 75% at 60% 40%,#000 25%,transparent 80%);
   -webkit-mask-image:radial-gradient(ellipse 85% 75% at 60% 40%,#000 25%,transparent 80%);
@@ -404,16 +408,16 @@
 @keyframes gridDrift{to{transform:translate3d(58px,58px,0)}}
 
 .orb{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
-.orb-1{width:46vw;height:46vw;left:52%;top:-14%;background:rgba(255,86,56,.30);animation:orbA 21s ease-in-out infinite}
-.orb-2{width:38vw;height:38vw;left:4%;top:38%;background:rgba(120,90,255,.20);animation:orbB 27s ease-in-out infinite}
-.orb-3{width:30vw;height:30vw;left:70%;top:52%;background:rgba(255,150,60,.16);animation:orbC 33s ease-in-out infinite}
+.orb-1{width:46vw;height:46vw;left:52%;top:-14%;background:rgba(255,86,56,.42);animation:orbA 21s ease-in-out infinite}
+.orb-2{width:38vw;height:38vw;left:4%;top:38%;background:rgba(120,90,255,.28);animation:orbB 27s ease-in-out infinite}
+.orb-3{width:30vw;height:30vw;left:70%;top:52%;background:rgba(255,150,60,.24);animation:orbC 33s ease-in-out infinite}
 @keyframes orbA{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-7vw,5vh,0)}}
 @keyframes orbB{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(6vw,-6vh,0)}}
 @keyframes orbC{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-4vw,-7vh,0)}}
 
 /* Two outlines, turning slowly. They give the eye something with an
    edge among all the blur. */
-.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.07)}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.10)}
 .ring-1{width:40vw;height:40vw;right:-8vw;top:8%;animation:ringSpin 58s linear infinite}
 .ring-2{width:24vw;height:24vw;right:6vw;top:30%;border-color:rgba(255,86,56,.16);animation:ringSpin 40s linear reverse infinite}
 @keyframes ringSpin{to{transform:rotate(360deg)}}
