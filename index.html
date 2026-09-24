@@ -702,6 +702,100 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   .sec-head,.stat,.cap-card,.role,.facts .row,.stackgrid > div,.links a{animation:none;opacity:1;transform:none}
 }
 
+
+/* ============================================================
+   CARDS THAT GATHER, AND A FIGURE THAT LEANS
+
+   The cards now travel: odd ones in from the left, even ones
+   from the right, converging into their row as it enters view.
+   Coming together is the point - a grid where everything rises
+   straight up reads as a list.
+
+   The figure walks further, ends larger, and stops against the
+   hairline that runs down the middle of the hero, leaning on it
+   with one forearm. Leaning on the page's own rule is why the
+   pose reads as deliberate rather than as a sticker.
+   ============================================================ */
+@supports (animation-timeline: view()){
+  .caps .cap-card:nth-child(odd),
+  .stackgrid > div:nth-child(odd){
+    animation:gatherL .85s cubic-bezier(.22,.9,.3,1) both;
+    animation-timeline:view(); animation-range:entry 0% entry 55%;
+  }
+  .caps .cap-card:nth-child(even),
+  .stackgrid > div:nth-child(even){
+    animation:gatherR .85s cubic-bezier(.22,.9,.3,1) both;
+    animation-timeline:view(); animation-range:entry 0% entry 55%;
+  }
+  .stat{
+    animation:gatherUp .8s cubic-bezier(.22,.9,.3,1) both;
+    animation-timeline:view(); animation-range:entry 0% entry 50%;
+  }
+  .plate{
+    animation:plateIn .9s cubic-bezier(.22,.9,.3,1) both;
+    animation-timeline:view(); animation-range:entry 0% entry 60%;
+  }
+  .role{
+    animation:gatherL .85s cubic-bezier(.22,.9,.3,1) both;
+    animation-timeline:view(); animation-range:entry 0% entry 55%;
+  }
+}
+@keyframes gatherL{from{opacity:0;transform:translate3d(-70px,22px,0)}to{opacity:1;transform:none}}
+@keyframes gatherR{from{opacity:0;transform:translate3d(70px,22px,0)}to{opacity:1;transform:none}}
+@keyframes gatherUp{from{opacity:0;transform:translate3d(0,40px,0) scale(.94)}to{opacity:1;transform:none}}
+@keyframes plateIn{from{opacity:0;transform:scale(.955)}to{opacity:1;transform:none}}
+
+/* ---- the figure: bigger, further, and leaning on the rule ---- */
+.figure{
+  left:calc(50% + 4px); right:auto;
+  bottom:clamp(96px,13vh,132px);
+  width:clamp(190px,21vw,310px);
+  animation:figWalk 3.1s cubic-bezier(.3,.05,.34,1) forwards;
+}
+@keyframes figWalk{from{transform:translateX(46vw)}to{transform:translateX(0)}}
+
+/* The whole body tips towards the line it is resting on. */
+.fig-all{animation:figBob .48s ease-in-out 0s 6, figLean .7s cubic-bezier(.3,1.2,.5,1) 2.95s forwards}
+@keyframes figLean{
+  0%{transform:translateY(-4px) rotate(0)}
+  60%{transform:translateY(2px) rotate(-6.5deg)}
+  100%{transform:translateY(0) rotate(-5.5deg)}
+}
+
+/* Left arm goes up and its forearm rests against the rule. */
+.arm-a{animation:armA .48s ease-in-out 0s 6, armLean .7s cubic-bezier(.3,1.2,.5,1) 2.9s forwards}
+@keyframes armLean{to{transform:rotate(-64deg)}}
+.fore-a{animation:foreLean .7s cubic-bezier(.3,1.2,.5,1) 2.9s forwards}
+@keyframes foreLean{to{transform:rotate(-18deg)}}
+
+/* Right hand stays on the hip. */
+.arm-b{animation:armB .48s ease-in-out 0s 6, armHipB .7s cubic-bezier(.3,1.2,.5,1) 2.9s forwards}
+.fore-b{animation:foreHipB .7s cubic-bezier(.3,1.2,.5,1) 2.9s forwards}
+@keyframes foreHipB{to{transform:rotate(118deg)}}
+
+/* Weight on the far leg, the near one crossed over it. */
+.leg-a{animation:legA .48s ease-in-out 0s 6, legLeanA .6s ease-out 2.95s forwards}
+.leg-b{animation:legB .48s ease-in-out 0s 6, legLeanB .6s ease-out 2.95s forwards}
+@keyframes legLeanA{to{transform:rotate(4deg)}}
+@keyframes legLeanB{to{transform:rotate(-7deg)}}
+
+.fig-head{animation:headBob .48s ease-in-out 0s 6, headLean .7s ease-out 2.95s forwards}
+@keyframes headLean{to{transform:rotate(3deg)}}
+
+@media (max-width:1100px){
+  .figure{left:auto;right:3%;width:clamp(150px,18vw,220px)}
+  .fig-all{animation:figBob .48s ease-in-out 0s 6, figLand .55s ease-out 2.95s forwards}
+  .arm-a{animation:armA .48s ease-in-out 0s 6, armHipA .6s ease-out 2.9s forwards}
+  .fore-a{animation:foreA .6s ease-out 2.9s forwards}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .caps .cap-card,.stackgrid > div,.stat,.plate,.role{animation:none;opacity:1;transform:none}
+  .fig-all{animation:none;transform:rotate(-5.5deg)}
+  .arm-a{animation:none;transform:rotate(-64deg)}
+  .fore-a{animation:none;transform:rotate(-18deg)}
+}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
