@@ -812,6 +812,75 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   .fore-a{animation:none;transform:rotate(10deg)}
 }
 
+
+/* ============================================================
+   A WALK WITH KNEES
+
+   The legs were single strokes pivoting at the hip, so they
+   swung like two rigid sticks - which is exactly what "broken
+   legs" looks like. Each leg is now a thigh and a shin with a
+   knee between them.
+
+   The shin is the whole trick: it stays nearly straight while
+   the foot is on the ground carrying weight, then folds hard as
+   the leg swings through so the foot clears the floor, and
+   straightens again just before it lands. The body also rises
+   twice per stride, not once - a person bobs on each step, not
+   on each pair.
+   ============================================================ */
+.leg,.shin{transform-box:view-box}
+.leg-a{transform-origin:90px 206px;animation:hipA .62s linear 0s 5, legLeanA .6s ease-out 3.05s forwards}
+.leg-b{transform-origin:112px 206px;animation:hipB .62s linear 0s 5, legLeanB .6s ease-out 3.05s forwards}
+.shin-a{transform-origin:88px 282px;animation:kneeA .62s linear 0s 5, kneeRest .5s ease-out 3.05s forwards}
+.shin-b{transform-origin:114px 282px;animation:kneeB .62s linear 0s 5, kneeRest2 .5s ease-out 3.05s forwards}
+
+@keyframes hipA{
+  0%{transform:rotate(19deg)}   25%{transform:rotate(6deg)}
+  50%{transform:rotate(-17deg)} 75%{transform:rotate(-1deg)}
+  100%{transform:rotate(19deg)}
+}
+@keyframes hipB{
+  0%{transform:rotate(-17deg)}  25%{transform:rotate(-1deg)}
+  50%{transform:rotate(19deg)}  75%{transform:rotate(6deg)}
+  100%{transform:rotate(-17deg)}
+}
+/* knee: loaded and straight through the stance, folded through the swing */
+@keyframes kneeA{
+  0%{transform:rotate(-3deg)}   20%{transform:rotate(-1deg)}
+  48%{transform:rotate(-8deg)}  62%{transform:rotate(-48deg)}
+  80%{transform:rotate(-24deg)} 100%{transform:rotate(-3deg)}
+}
+@keyframes kneeB{
+  0%{transform:rotate(-8deg)}   12%{transform:rotate(-48deg)}
+  30%{transform:rotate(-24deg)} 50%{transform:rotate(-3deg)}
+  70%{transform:rotate(-1deg)}  100%{transform:rotate(-8deg)}
+}
+@keyframes kneeRest{to{transform:rotate(-3deg)}}
+@keyframes kneeRest2{to{transform:rotate(-9deg)}}
+
+/* two rises per stride */
+.fig-all{animation:figBob .31s ease-in-out 0s 10, figLean .7s cubic-bezier(.3,1.2,.5,1) 3.05s forwards}
+@keyframes figBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* arms keep the stride's period, opposite to the legs */
+.arm-a{animation:armA .62s ease-in-out 0s 5, armLean .7s cubic-bezier(.3,1.2,.5,1) 3s forwards}
+.arm-b{animation:armB .62s ease-in-out 0s 5, armHipB .7s cubic-bezier(.3,1.2,.5,1) 3s forwards}
+@keyframes armA{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
+@keyframes armB{0%,100%{transform:rotate(15deg)}50%{transform:rotate(-15deg)}}
+.fore-a{animation:foreSwingA .62s ease-in-out 0s 5, foreLean .7s cubic-bezier(.3,1.2,.5,1) 3s forwards}
+@keyframes foreSwingA{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(-26deg)}}
+.fore-b{animation:foreSwingB .62s ease-in-out 0s 5, foreHipB .7s cubic-bezier(.3,1.2,.5,1) 3s forwards}
+@keyframes foreSwingB{0%,100%{transform:rotate(26deg)}50%{transform:rotate(14deg)}}
+
+.fig-head{animation:headBob .62s ease-in-out 0s 5, headLean .7s ease-out 3.05s forwards}
+.fig-tail{animation:tailSway .62s ease-in-out 0s 5, tailRest .7s ease-out 3.05s forwards}
+.figure{animation:figWalk 3.1s cubic-bezier(.24,.02,.32,1) forwards}
+
+@media (prefers-reduced-motion:reduce){
+  .leg-a,.leg-b,.shin-a,.shin-b{animation:none}
+  .shin-a,.shin-b{transform:rotate(-4deg)}
+}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
@@ -851,12 +920,18 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
     <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g class="fig-all">
         <g class="leg leg-a">
-          <path d="M90 206 L86 300 L85 352" stroke="#23211D" stroke-width="20" stroke-linecap="round"/>
-          <path d="M85 356 Q73 358 71 365 Q78 369 93 366 Z" fill="#0F0E0C"/>
+          <path d="M90 206 L88 282" stroke="#23211D" stroke-width="20" stroke-linecap="round"/>
+          <g class="shin shin-a">
+            <path d="M88 282 L86 352" stroke="#23211D" stroke-width="17" stroke-linecap="round"/>
+            <path d="M86 356 Q73 358 71 365 Q78 369 94 366 Z" fill="#0F0E0C"/>
+          </g>
         </g>
         <g class="leg leg-b">
-          <path d="M112 206 L116 300 L117 352" stroke="#2C2A25" stroke-width="20" stroke-linecap="round"/>
-          <path d="M117 356 Q129 358 131 365 Q124 369 109 366 Z" fill="#0F0E0C"/>
+          <path d="M112 206 L114 282" stroke="#2C2A25" stroke-width="20" stroke-linecap="round"/>
+          <g class="shin shin-b">
+            <path d="M114 282 L116 352" stroke="#2C2A25" stroke-width="17" stroke-linecap="round"/>
+            <path d="M116 356 Q129 358 131 365 Q124 369 108 366 Z" fill="#0F0E0C"/>
+          </g>
         </g>
 
         <g class="fig-breath">
