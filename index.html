@@ -635,6 +635,73 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   .ln > span{animation:none;transform:none}
 }
 
+
+/* ============================================================
+   MOTION, AFTER THE REFERENCE
+
+   Three things carry the feel there: a mark that turns as you
+   scroll rather than on a timer, a ground that flips to the
+   accent for one full-bleed moment, and technical marks -
+   dotted circles, crosshairs, a diagonal - that make the page
+   read as drafted rather than decorated.
+
+   The turning is done with a scroll-driven animation timeline,
+   so it is the scrollbar driving it and not a rAF loop. Where
+   that is unsupported it simply turns slowly on its own, which
+   is a fine second best.
+   ============================================================ */
+.spin-stage{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;
+  padding:clamp(60px,10vh,120px) 0;
+}
+.spin-mark{width:clamp(110px,14vw,190px);height:auto;color:var(--accent);
+  animation:markTurn 12s linear infinite}
+.spin-cap{color:var(--ink-3)}
+@supports (animation-timeline: scroll()){
+  .spin-mark{
+    animation:markTurn 1s linear;
+    animation-timeline:scroll(root block);
+  }
+}
+@keyframes markTurn{to{transform:rotate(360deg)}}
+
+/* ---- the one full-bleed accent moment ---- */
+.cta-flip{
+  position:relative;overflow:hidden;
+  background:var(--accent);
+  padding-block:clamp(70px,12vh,140px);
+  margin-top:clamp(50px,8vh,90px);
+}
+.cta-flip .contact h2{color:#fff;font-size:clamp(40px,7.4vw,118px);line-height:.94}
+.cta-flip .links a{color:#fff;border-color:rgba(255,255,255,.34)}
+.cta-flip .links a:hover{background:rgba(255,255,255,.1)}
+.cta-flip .mono,.cta-flip .lbl{color:rgba(255,255,255,.72)!important}
+.cta-flip .val{color:#fff}
+.cta-flip footer{border-top:1px solid rgba(255,255,255,.28)}
+.cta-flip .hexes path{stroke:rgba(255,255,255,.3)}
+.cta-flip .hexes .on{fill:rgba(255,255,255,.85)}
+
+.tech{position:absolute;pointer-events:none}
+.tech-ring{right:-70px;top:50%;transform:translateY(-50%);
+  width:clamp(260px,34vw,460px);animation:ringTurn 60s linear infinite}
+@keyframes ringTurn{to{transform:translateY(-50%) rotate(360deg)}}
+.hex-cta{left:4%;bottom:12%;width:clamp(90px,10vw,150px);opacity:.55}
+
+/* ---- every section arrives rather than appears ---- */
+@supports (animation-timeline: view()){
+  .sec-head,.stat,.cap-card,.role,.facts .row,.stackgrid > div,.links a{
+    animation:arrive .7s ease-out both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 42%;
+  }
+}
+@keyframes arrive{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .spin-mark,.tech-ring{animation:none}
+  .sec-head,.stat,.cap-card,.role,.facts .row,.stackgrid > div,.links a{animation:none;opacity:1;transform:none}
+}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
@@ -875,6 +942,15 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   </div>
 </section>
 
+
+<div class="spin-stage" aria-hidden="true">
+  <svg class="spin-mark" viewBox="0 0 200 200">
+    <path d="M100 8l68 39v106l-68 39-68-39V47z" fill="none" stroke="currentColor" stroke-width="2" opacity=".28"/>
+    <path d="M100 30l49 28v76l-49 28-49-28V58z" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/>
+    <path d="M100 56l27 15v42l-27 15-27-15V71z" fill="currentColor"/>
+  </svg>
+  <span class="spin-cap mono">Design &middot; Build &middot; Ship</span>
+</div>
 <section>
   <div class="wrap">
     <div class="sec-head rv"><span class="mono">03</span><h2>How I work</h2></div>
@@ -901,7 +977,18 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   </div>
 </section>
 
-<section>
+<section class="cta-flip">
+  <svg class="tech tech-ring" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="200" cy="200" r="168" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="1" stroke-dasharray="2 9"/>
+    <path d="M200 16v22M200 362v22M16 200h22M362 200h22" stroke="rgba(255,255,255,.5)" stroke-width="1"/>
+    <path d="M58 58l286 286" stroke="rgba(255,255,255,.14)" stroke-width="1"/>
+  </svg>
+  <svg class="hexes hex-cta" viewBox="0 0 160 150" aria-hidden="true">
+    <path d="M34 24l20 12v24L34 72 14 60V36z"/><path d="M74 24l20 12v24L74 72 54 60V36z"/>
+    <path d="M54 60l20 12v24l-20 12-20-12V72z"/><path d="M94 60l20 12v24l-20 12-20-12V72z"/>
+    <path class="on" d="M74 24l20 12v24L74 72 54 60V36z"/>
+    <path class="on" d="M54 60l20 12v24l-20 12-20-12V72z"/>
+  </svg>
   <div class="wrap contact">
     <h2 class="rv">Let's talk.</h2>
     <div class="links">
