@@ -796,6 +796,22 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   .fore-a{animation:none;transform:rotate(-18deg)}
 }
 
+
+/* ---- the lean, corrected ----
+   SVG rotates clockwise for positive angles, and the upper arm already
+   hangs at about 100 degrees from east. Asking for -64 swung it across
+   the chest instead of out to the side; reaching the rule needs roughly
+   +92, with the forearm left almost straight so the whole arm becomes
+   one line to the wall. She is also nudged right so the hand lands on
+   the rule rather than through it. */
+.figure{left:calc(50% - 26px)}
+@keyframes armLean{to{transform:rotate(92deg)}}
+@keyframes foreLean{to{transform:rotate(10deg)}}
+@media (prefers-reduced-motion:reduce){
+  .arm-a{animation:none;transform:rotate(92deg)}
+  .fore-a{animation:none;transform:rotate(10deg)}
+}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
