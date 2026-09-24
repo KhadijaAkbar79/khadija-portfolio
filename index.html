@@ -1,20 +1,3 @@
-<div class="orbit" aria-hidden="true">
-  <span class="orbit-label ol-top">Design</span>
-  <span class="orbit-label ol-left">Build</span>
-  <span class="orbit-label ol-right">Ship</span>
-  <svg class="orbit-ring" viewBox="0 0 400 400">
-    <circle cx="200" cy="200" r="168" fill="none" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 9"/>
-    <g stroke="var(--accent)" stroke-opacity=".75" stroke-width="1.4">
-      <path d="M200 20v16M200 364v16M20 200h16M364 200h16"/>
-      <path d="M73 73l11 11M316 316l11 11M327 73l-11 11M84 316l-11 11"/>
-    </g>
-  </svg>
-  <svg class="orbit-mark" viewBox="0 0 200 200">
-    <path d="M100 8l68 39v106l-68 39-68-39V47z" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"/>
-    <path d="M100 30l49 28v76l-49 28-49-28V58z" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/>
-    <path d="M100 56l27 15v42l-27 15-27-15V71z" fill="currentColor"/>
-  </svg>
-</div>
 <title>Khadija Akbar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -667,19 +650,8 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
    that is unsupported it simply turns slowly on its own, which
    is a fine second best.
    ============================================================ */
-.spin-stage{
-  position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;
-  padding:clamp(60px,10vh,120px) 0;
-}
-.spin-mark{width:clamp(110px,14vw,190px);height:auto;color:var(--accent);
-  animation:markTurn 12s linear infinite}
-.spin-cap{color:var(--ink-3)}
 @supports (animation-timeline: scroll()){
-  .spin-mark{
-    animation:markTurn 1s linear;
-    animation-timeline:scroll(root block);
   }
-}
 @keyframes markTurn{to{transform:rotate(360deg)}}
 
 /* ---- the one full-bleed accent moment ---- */
@@ -715,7 +687,7 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
 @keyframes arrive{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 
 @media (prefers-reduced-motion:reduce){
-  .spin-mark,.tech-ring{animation:none}
+  .tech-ring{animation:none}
   .sec-head,.stat,.cap-card,.role,.facts .row,.stackgrid > div,.links a{animation:none;opacity:1;transform:none}
 }
 
@@ -1231,14 +1203,24 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
 </section>
 
 
-<div class="spin-stage" aria-hidden="true">
-  <svg class="spin-mark" viewBox="0 0 200 200">
-    <path d="M100 8l68 39v106l-68 39-68-39V47z" fill="none" stroke="currentColor" stroke-width="2" opacity=".28"/>
-    <path d="M100 30l49 28v76l-49 28-49-28V58z" fill="none" stroke="currentColor" stroke-width="2" opacity=".5"/>
+<div class="orbit" aria-hidden="true">
+  <span class="orbit-label ol-top">Design</span>
+  <span class="orbit-label ol-left">Build</span>
+  <span class="orbit-label ol-right">Ship</span>
+  <svg class="orbit-ring" viewBox="0 0 400 400">
+    <circle cx="200" cy="200" r="168" fill="none" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 9"/>
+    <g stroke="var(--accent)" stroke-opacity=".75" stroke-width="1.4">
+      <path d="M200 20v16M200 364v16M20 200h16M364 200h16"/>
+      <path d="M73 73l11 11M316 316l11 11M327 73l-11 11M84 316l-11 11"/>
+    </g>
+  </svg>
+  <svg class="orbit-mark" viewBox="0 0 200 200">
+    <path d="M100 8l68 39v106l-68 39-68-39V47z" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"/>
+    <path d="M100 30l49 28v76l-49 28-49-28V58z" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/>
     <path d="M100 56l27 15v42l-27 15-27-15V71z" fill="currentColor"/>
   </svg>
-  <span class="spin-cap mono">Design &middot; Build &middot; Ship</span>
 </div>
+
 <section>
   <div class="wrap">
     <div class="sec-head rv"><span class="mono">03</span><h2>How I work</h2></div>
