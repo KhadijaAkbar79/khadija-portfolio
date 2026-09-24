@@ -437,6 +437,23 @@
   .hero-bg::before,.orb,.ring,.sheen{animation:none}
 }
 
+
+/* The head lags a fraction behind the body while walking, and the eyes
+   blink on a loop - without it a drawn face reads as a mask. */
+.fig-head{transform-box:view-box;transform-origin:100px 78px;
+  animation:headBob .48s ease-in-out 0s 5, headRest .6s ease-out 2.4s forwards}
+@keyframes headBob{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}}
+@keyframes headRest{to{transform:rotate(0)}}
+
+.fig-eyes{transform-box:view-box;transform-origin:100px 54px;
+  animation:blink 5.4s ease-in-out 3.2s infinite}
+@keyframes blink{
+  0%,92%,100%{transform:scaleY(1)}
+  95%{transform:scaleY(.12)}
+  97.5%{transform:scaleY(1)}
+}
+@media (prefers-reduced-motion:reduce){ .fig-head,.fig-eyes{animation:none} }
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
@@ -459,51 +476,61 @@
   <div class="figure" aria-hidden="true">
     <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g class="fig-all">
-        <!-- legs: trousers, then shoes -->
         <g class="leg leg-a">
           <path d="M90 206 L86 300 L85 352" stroke="#23211D" stroke-width="20" stroke-linecap="round"/>
-          <path d="M85 356 Q74 358 72 364 Q78 368 92 366 Z" fill="#111" />
+          <path d="M85 356 Q73 358 71 365 Q78 369 93 366 Z" fill="#0F0E0C"/>
         </g>
         <g class="leg leg-b">
           <path d="M112 206 L116 300 L117 352" stroke="#2C2A25" stroke-width="20" stroke-linecap="round"/>
-          <path d="M117 356 Q128 358 130 364 Q124 368 110 366 Z" fill="#111"/>
+          <path d="M117 356 Q129 358 131 365 Q124 369 109 366 Z" fill="#0F0E0C"/>
         </g>
 
         <g class="fig-breath">
-          <!-- hips -->
           <path d="M79 176 Q100 184 121 176 L124 212 Q100 221 76 212 Z" fill="#2C2A25"/>
-          <!-- top -->
           <path d="M80 100 Q100 93 120 100 L124 178 Q100 186 76 178 Z" fill="var(--accent)"/>
-          <path d="M80 100 Q100 107 120 100 L119 112 Q100 118 81 112 Z" fill="#000" opacity=".12"/>
+          <path d="M80 100 Q100 107 120 100 L119 113 Q100 119 81 113 Z" fill="#000" opacity=".13"/>
         </g>
 
-        <!-- arms -->
         <g class="arm arm-a">
           <path d="M80 112 L72 160" stroke="var(--accent)" stroke-width="14" stroke-linecap="round"/>
           <g class="fore fore-a">
-            <path d="M72 160 L69 200" stroke="#D69B79" stroke-width="12" stroke-linecap="round"/>
-            <circle cx="69" cy="203" r="7" fill="#D69B79"/>
+            <path d="M72 160 L69 200" stroke="#E0A783" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="69" cy="203" r="7" fill="#E0A783"/>
           </g>
         </g>
         <g class="arm arm-b">
           <path d="M120 112 L128 160" stroke="var(--accent)" stroke-width="14" stroke-linecap="round"/>
           <g class="fore fore-b">
-            <path d="M128 160 L131 200" stroke="#D69B79" stroke-width="12" stroke-linecap="round"/>
-            <circle cx="131" cy="203" r="7" fill="#D69B79"/>
+            <path d="M128 160 L131 200" stroke="#E0A783" stroke-width="12" stroke-linecap="round"/>
+            <circle cx="131" cy="203" r="7" fill="#E0A783"/>
           </g>
         </g>
 
-        <!-- neck + head -->
-        <path d="M94 78 L106 78 L106 98 L94 98 Z" fill="#C98D6C"/>
-        <g class="fig-tail">
-          <path d="M118 42 Q140 56 136 86 Q132 104 122 98 Q130 74 114 56 Z" fill="#1C1713"/>
+        <path d="M94 76 L106 76 L106 97 L94 97 Z" fill="#C98D6C"/>
+
+        <g class="fig-head">
+          <g class="fig-tail">
+            <path d="M119 40 Q142 56 137 88 Q133 107 122 100 Q131 74 114 55 Z" fill="#1C1713"/>
+          </g>
+          <ellipse cx="100" cy="52" rx="24" ry="27" fill="#E8B08A"/>
+          <path d="M78 58 Q74 46 78 36 Q86 20 100 20 Q114 20 122 36 Q126 46 122 58 Q120 40 112 36 Q100 44 84 38 Q78 44 78 58 Z" fill="#1C1713"/>
+          <path d="M77 50 Q71 70 75 84 Q81 79 79 60 Z" fill="#1C1713"/>
+          <path d="M123 50 Q129 70 125 84 Q119 79 121 60 Z" fill="#1C1713"/>
+
+          <!-- face: the eyes blink on a loop, which is what stops a
+               drawn face reading as a mask -->
+          <g class="fig-eyes">
+            <ellipse cx="91" cy="54" rx="3.1" ry="3.6" fill="#22190F"/>
+            <ellipse cx="109" cy="54" rx="3.1" ry="3.6" fill="#22190F"/>
+            <circle cx="92.1" cy="52.7" r="1.05" fill="#fff" opacity=".9"/>
+            <circle cx="110.1" cy="52.7" r="1.05" fill="#fff" opacity=".9"/>
+          </g>
+          <path d="M86.5 46.5 Q91 44.2 95.5 46.6" stroke="#2A1F15" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M104.5 46.6 Q109 44.2 113.5 46.5" stroke="#2A1F15" stroke-width="1.9" stroke-linecap="round"/>
+          <path d="M95.5 63.5 Q100 66.6 104.5 63.5" stroke="#8A4A3A" stroke-width="1.9" stroke-linecap="round" fill="none"/>
+          <ellipse cx="85" cy="60" rx="3.4" ry="2.1" fill="#E07A5F" opacity=".33"/>
+          <ellipse cx="115" cy="60" rx="3.4" ry="2.1" fill="#E07A5F" opacity=".33"/>
         </g>
-        <ellipse cx="100" cy="52" rx="24" ry="27" fill="#E0A783"/>
-        <!-- hair: crown and sides, leaving the face open -->
-        <path d="M76 52 Q74 20 100 20 Q126 20 124 52 L124 40 Q100 30 76 40 Z" fill="#1C1713"/>
-        <path d="M75 46 Q100 26 125 46 L126 62 Q120 42 100 40 Q80 42 74 62 Z" fill="#1C1713"/>
-        <path d="M76 48 Q70 70 74 84 Q80 80 78 60 Z" fill="#1C1713"/>
-        <path d="M124 48 Q130 70 126 84 Q120 80 122 60 Z" fill="#1C1713"/>
       </g>
     </svg>
   </div>
