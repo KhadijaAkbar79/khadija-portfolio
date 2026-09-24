@@ -576,6 +576,43 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
    its top follows the accent. */
 .figure{bottom:112px}
 
+
+/* ---- corrections after seeing it live ---- */
+
+/* The reference is light, full stop. Following the system preference
+   meant a dark-mode visitor got the old palette, so light is now the
+   default regardless and dark only happens if the toggle asks for it. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="dark"]){
+    --paper:#F4F3F1; --paper-2:#ECEBE8;
+    --ink:#0C0C0C; --ink-2:#48484A; --ink-3:#8B8B8C;
+    --rule:#E2E1DE; --accent:#E8156F; --card:#FFFFFF; --shell:#F4F3F1;
+  }
+}
+
+/* Anton's caps are tall, and at 142px with a .88 leading the headline
+   ran off the top of the hero and the reveal masks cropped it. */
+.hero h1{
+  font-size:clamp(38px,6.6vw,104px);
+  line-height:.96;
+  max-width:14ch;
+  margin-bottom:clamp(16px,3vh,28px);
+}
+.ln{overflow:hidden;padding-bottom:.04em}
+.hero-inner{padding-bottom:clamp(88px,12vh,120px)}
+
+/* The dock was sitting on top of the strip it shares the bottom with. */
+.hero-strip{padding-bottom:6px}
+.dock{bottom:16px}
+@media (max-width:1100px){ .hero-strip .mono:nth-child(2){display:none} }
+
+/* Hexagons: outlines strong enough to read as a grid rather than
+   leaving three lit cells floating on their own. */
+.hexes path{stroke:rgba(12,12,12,.16);stroke-width:1.2}
+.hexes .on{opacity:.9}
+.hex-a{left:3%;top:20%;opacity:.85}
+.hex-c{right:5%;top:12%;opacity:.7}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
