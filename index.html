@@ -613,6 +613,28 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
 .hex-a{left:3%;top:20%;opacity:.85}
 .hex-c{right:5%;top:12%;opacity:.7}
 
+
+/* The headline reveal waited on a .lit class added by script. With the
+   bigger type only the first line ever arrived - the other two stayed
+   parked below their masks. It runs on a CSS animation now, so nothing
+   has to fire for the headline to exist.
+
+   Anton also needs breathing room: its caps are tall, and a mask sized
+   to a .96 leading sliced the tops off. */
+.hero h1{font-size:clamp(34px,5.8vw,92px);line-height:1.04;max-width:15ch}
+.ln{overflow:hidden;padding:.1em 0 .07em}
+.ln > span{
+  transform:translateY(105%);
+  animation:lnRise .9s cubic-bezier(.16,.84,.3,1) .15s both;
+}
+.ln:nth-child(2) > span{animation-delay:.26s}
+.ln:nth-child(3) > span{animation-delay:.37s}
+@keyframes lnRise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+.lit .ln > span{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .ln > span{animation:none;transform:none}
+}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
