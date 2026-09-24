@@ -1,3 +1,20 @@
+<div class="orbit" aria-hidden="true">
+  <span class="orbit-label ol-top">Design</span>
+  <span class="orbit-label ol-left">Build</span>
+  <span class="orbit-label ol-right">Ship</span>
+  <svg class="orbit-ring" viewBox="0 0 400 400">
+    <circle cx="200" cy="200" r="168" fill="none" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 9"/>
+    <g stroke="var(--accent)" stroke-opacity=".75" stroke-width="1.4">
+      <path d="M200 20v16M200 364v16M20 200h16M364 200h16"/>
+      <path d="M73 73l11 11M316 316l11 11M327 73l-11 11M84 316l-11 11"/>
+    </g>
+  </svg>
+  <svg class="orbit-mark" viewBox="0 0 200 200">
+    <path d="M100 8l68 39v106l-68 39-68-39V47z" fill="none" stroke="currentColor" stroke-width="2" opacity=".3"/>
+    <path d="M100 30l49 28v76l-49 28-49-28V58z" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/>
+    <path d="M100 56l27 15v42l-27 15-27-15V71z" fill="currentColor"/>
+  </svg>
+</div>
 <title>Khadija Akbar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -881,6 +898,71 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   .shin-a,.shin-b{transform:rotate(-4deg)}
 }
 
+
+/* ============================================================
+   THE MOTIF, PROPERLY
+
+   In the reference the hexagons are not decoration: each cell
+   carries a letter, and a light travels across the cluster,
+   lighting a few at a time. Mine were empty and static, which
+   is why they read as three pink blobs.
+
+   Every cell now holds a letter and runs the same light on its
+   own offset, so the cluster flickers alive the way a network
+   diagram does.
+
+   The orbit replaces the lone spinning mark: a dashed ring with
+   crosshair ticks, three labels around it, and the mark turning
+   in the middle on the scrollbar.
+   ============================================================ */
+.hexes{overflow:visible}
+.hcell{fill:transparent;stroke:rgba(12,12,12,.13);stroke-width:1.1;
+  animation:cellOn 7s ease-in-out infinite; animation-delay:var(--d)}
+.hchar{font-family:"JetBrains Mono",monospace;font-size:11px;text-anchor:middle;
+  fill:rgba(12,12,12,.28);animation:charOn 7s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes cellOn{
+  0%,76%,100%{fill:transparent}
+  84%{fill:var(--accent)}
+  92%{fill:var(--accent)}
+}
+@keyframes charOn{
+  0%,76%,100%{fill:rgba(12,12,12,.28)}
+  84%,92%{fill:#fff}
+}
+.cta-flip .hcell{stroke:rgba(255,255,255,.34)}
+.cta-flip .hcell,.cta-flip .hchar{animation:none}
+.cta-flip .hchar{fill:rgba(255,255,255,.55)}
+
+/* ---- orbit ---- */
+.orbit{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  padding:clamp(70px,13vh,150px) 0;
+}
+.orbit-ring{width:clamp(250px,36vw,430px);height:auto;
+  animation:orbitTurn 90s linear infinite}
+@keyframes orbitTurn{to{transform:rotate(360deg)}}
+.orbit-mark{
+  position:absolute;width:clamp(92px,11vw,150px);height:auto;color:var(--accent);
+  animation:markTurn 14s linear infinite;
+}
+@supports (animation-timeline: scroll()){
+  .orbit-mark{animation:markTurn 1s linear;animation-timeline:scroll(root block)}
+}
+.orbit-label{
+  position:absolute;font-family:"Anton",sans-serif;text-transform:uppercase;
+  font-size:clamp(14px,1.7vw,22px);letter-spacing:.01em;color:var(--ink);
+}
+.orbit-label::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);margin-right:9px;vertical-align:middle}
+.ol-top{top:clamp(34px,7vh,86px)}
+.ol-left{left:clamp(4px,7vw,150px)}
+.ol-right{right:clamp(4px,7vw,150px)}
+@media (max-width:760px){ .ol-left,.ol-right{display:none} }
+
+@media (prefers-reduced-motion:reduce){
+  .hcell,.hchar,.orbit-ring,.orbit-mark{animation:none}
+}
+
 </style>
 
 <div class="rail"><i id="railFill"></i></div>
@@ -901,20 +983,41 @@ h1,h2,h3,.hero h1,.cap-card h4,.mark,.sec-head h2,.plate-txt h3{
   </div>
   <div class="hero-veil"></div>
 
-<svg class="hexes hex-a" viewBox="0 0 220 200" aria-hidden="true">
-  <path d="M40 30l22 13v26L40 82 18 69V43z"/><path d="M84 30l22 13v26L84 82 62 69V43z"/>
-  <path d="M128 30l22 13v26l-22 13-22-13V43z"/><path d="M62 68l22 13v26l-22 13-22-13V81z"/>
-  <path d="M106 68l22 13v26l-22 13-22-13V81z"/><path d="M150 68l22 13v26l-22 13-22-13V81z"/>
-  <path d="M84 106l22 13v26l-22 13-22-13v-26z"/><path d="M128 106l22 13v26l-22 13-22-13v-26z"/>
-  <path class="on" d="M84 30l22 13v26L84 82 62 69V43z"/>
-  <path class="on" d="M106 68l22 13v26l-22 13-22-13V81z"/>
-  <path class="on" d="M128 106l22 13v26l-22 13-22-13v-26z"/>
+<svg class="hexes hex-a" viewBox="0 0 208 178" aria-hidden="true">
+      <g class="hc" style="--d:0.00s"><path class="hcell" d="M24 4L44 16L44 40L24 52L4 40L4 16Z"/><text class="hchar" x="24" y="32">K</text></g>
+      <g class="hc" style="--d:0.37s"><path class="hcell" d="M24 40L44 52L44 76L24 88L4 76L4 52Z"/><text class="hchar" x="24" y="68">H</text></g>
+      <g class="hc" style="--d:0.74s"><path class="hcell" d="M24 76L44 88L44 112L24 124L4 112L4 88Z"/><text class="hchar" x="24" y="104">A</text></g>
+      <g class="hc" style="--d:1.11s"><path class="hcell" d="M24 112L44 124L44 148L24 160L4 148L4 124Z"/><text class="hchar" x="24" y="140">D</text></g>
+      <g class="hc" style="--d:1.48s"><path class="hcell" d="M64 22L84 34L84 58L64 70L44 58L44 34Z"/><text class="hchar" x="64" y="50">I</text></g>
+      <g class="hc" style="--d:1.85s"><path class="hcell" d="M64 58L84 70L84 94L64 106L44 94L44 70Z"/><text class="hchar" x="64" y="86">J</text></g>
+      <g class="hc" style="--d:2.22s"><path class="hcell" d="M64 94L84 106L84 130L64 142L44 130L44 106Z"/><text class="hchar" x="64" y="122">A</text></g>
+      <g class="hc" style="--d:2.59s"><path class="hcell" d="M64 130L84 142L84 166L64 178L44 166L44 142Z"/><text class="hchar" x="64" y="158">K</text></g>
+      <g class="hc" style="--d:2.96s"><path class="hcell" d="M104 4L124 16L124 40L104 52L84 40L84 16Z"/><text class="hchar" x="104" y="32">H</text></g>
+      <g class="hc" style="--d:3.33s"><path class="hcell" d="M104 40L124 52L124 76L104 88L84 76L84 52Z"/><text class="hchar" x="104" y="68">A</text></g>
+      <g class="hc" style="--d:3.70s"><path class="hcell" d="M104 76L124 88L124 112L104 124L84 112L84 88Z"/><text class="hchar" x="104" y="104">D</text></g>
+      <g class="hc" style="--d:4.07s"><path class="hcell" d="M104 112L124 124L124 148L104 160L84 148L84 124Z"/><text class="hchar" x="104" y="140">I</text></g>
+      <g class="hc" style="--d:4.44s"><path class="hcell" d="M144 22L164 34L164 58L144 70L124 58L124 34Z"/><text class="hchar" x="144" y="50">J</text></g>
+      <g class="hc" style="--d:4.81s"><path class="hcell" d="M144 58L164 70L164 94L144 106L124 94L124 70Z"/><text class="hchar" x="144" y="86">A</text></g>
+      <g class="hc" style="--d:5.18s"><path class="hcell" d="M144 94L164 106L164 130L144 142L124 130L124 106Z"/><text class="hchar" x="144" y="122">K</text></g>
+      <g class="hc" style="--d:5.55s"><path class="hcell" d="M144 130L164 142L164 166L144 178L124 166L124 142Z"/><text class="hchar" x="144" y="158">H</text></g>
+      <g class="hc" style="--d:5.92s"><path class="hcell" d="M184 4L204 16L204 40L184 52L164 40L164 16Z"/><text class="hchar" x="184" y="32">A</text></g>
+      <g class="hc" style="--d:6.29s"><path class="hcell" d="M184 40L204 52L204 76L184 88L164 76L164 52Z"/><text class="hchar" x="184" y="68">D</text></g>
+      <g class="hc" style="--d:6.66s"><path class="hcell" d="M184 76L204 88L204 112L184 124L164 112L164 88Z"/><text class="hchar" x="184" y="104">I</text></g>
+      <g class="hc" style="--d:0.03s"><path class="hcell" d="M184 112L204 124L204 148L184 160L164 148L164 124Z"/><text class="hchar" x="184" y="140">J</text></g>
 </svg>
-<svg class="hexes hex-c" viewBox="0 0 160 150" aria-hidden="true">
-  <path d="M34 24l20 12v24L34 72 14 60V36z"/><path d="M74 24l20 12v24L74 72 54 60V36z"/>
-  <path d="M54 60l20 12v24l-20 12-20-12V72z"/><path d="M94 60l20 12v24l-20 12-20-12V72z"/>
-  <path class="on" d="M74 24l20 12v24L74 72 54 60V36z"/>
-  <path class="on" d="M94 60l20 12v24l-20 12-20-12V72z"/>
+<svg class="hexes hex-c" viewBox="0 0 168 142" aria-hidden="true">
+      <g class="hc" style="--d:0.00s"><path class="hcell" d="M24 4L44 16L44 40L24 52L4 40L4 16Z"/><text class="hchar" x="24" y="32">B</text></g>
+      <g class="hc" style="--d:0.37s"><path class="hcell" d="M24 40L44 52L44 76L24 88L4 76L4 52Z"/><text class="hchar" x="24" y="68">U</text></g>
+      <g class="hc" style="--d:0.74s"><path class="hcell" d="M24 76L44 88L44 112L24 124L4 112L4 88Z"/><text class="hchar" x="24" y="104">I</text></g>
+      <g class="hc" style="--d:1.11s"><path class="hcell" d="M64 22L84 34L84 58L64 70L44 58L44 34Z"/><text class="hchar" x="64" y="50">L</text></g>
+      <g class="hc" style="--d:1.48s"><path class="hcell" d="M64 58L84 70L84 94L64 106L44 94L44 70Z"/><text class="hchar" x="64" y="86">D</text></g>
+      <g class="hc" style="--d:1.85s"><path class="hcell" d="M64 94L84 106L84 130L64 142L44 130L44 106Z"/><text class="hchar" x="64" y="122">S</text></g>
+      <g class="hc" style="--d:2.22s"><path class="hcell" d="M104 4L124 16L124 40L104 52L84 40L84 16Z"/><text class="hchar" x="104" y="32">B</text></g>
+      <g class="hc" style="--d:2.59s"><path class="hcell" d="M104 40L124 52L124 76L104 88L84 76L84 52Z"/><text class="hchar" x="104" y="68">U</text></g>
+      <g class="hc" style="--d:2.96s"><path class="hcell" d="M104 76L124 88L124 112L104 124L84 112L84 88Z"/><text class="hchar" x="104" y="104">I</text></g>
+      <g class="hc" style="--d:3.33s"><path class="hcell" d="M144 22L164 34L164 58L144 70L124 58L124 34Z"/><text class="hchar" x="144" y="50">L</text></g>
+      <g class="hc" style="--d:3.70s"><path class="hcell" d="M144 58L164 70L164 94L144 106L124 94L124 70Z"/><text class="hchar" x="144" y="86">D</text></g>
+      <g class="hc" style="--d:4.07s"><path class="hcell" d="M144 94L164 106L164 130L144 142L124 130L124 106Z"/><text class="hchar" x="144" y="122">S</text></g>
 </svg>
   <div class="figure" aria-hidden="true">
     <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
