@@ -111,11 +111,11 @@ body.on-blue .topbar{background:var(--blue)}
    keeps a drawn figure from reading as a sticker: breath, a slow sway,
    and a blink. ---- */
 .figure{position:absolute;left:50%;z-index:3;
-  width:clamp(205px,23vw,360px);
-  top:clamp(50px,9vh,88px);bottom:auto;
+  width:clamp(230px,30vw,470px);
+  top:clamp(46px,8vh,84px);bottom:auto;
   transform:translateX(-50%);will-change:transform;
   opacity:0;animation:figIn 1.15s ease .5s forwards}
-.figure svg{width:100%;height:auto;display:block;overflow:visible}
+.figure svg{width:100%;height:auto;display:block;overflow:hidden}
 @keyframes figIn{from{opacity:0}to{opacity:1}}
 
 .fig-breath{transform-box:view-box;transform-origin:100px 196px;
@@ -133,7 +133,7 @@ body.on-blue .topbar{background:var(--blue)}
 
 /* the pale panel she is sitting against, as in the reference */
 .hero-plinth{position:absolute;left:50%;transform:translateX(-50%);z-index:0;
-  top:clamp(60px,11vh,120px);bottom:0;width:clamp(250px,28vw,420px);
+  top:clamp(56px,10vh,110px);bottom:0;width:clamp(270px,34vw,530px);
   background:rgba(255,255,255,.34);pointer-events:none}
 
 /* the small tab clinging to the right edge */
@@ -383,40 +383,28 @@ body.on-blue .topbar{background:var(--blue)}
   <div class="hero-plinth"></div>
   <div class="hero-rule"></div>
   <div class="figure" aria-hidden="true">
-    <svg viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g class="fig-all">
+    <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- She ends at the lap. A hard edge there would read as a
+             mistake, so the last stretch fades out instead. -->
+        <linearGradient id="figFadeG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fff"/>
+          <stop offset=".86" stop-color="#fff"/>
+          <stop offset="1" stop-color="#000"/>
+        </linearGradient>
+        <mask id="figFade">
+          <rect x="0" y="0" width="200" height="240" fill="url(#figFadeG)"/>
+        </mask>
+      </defs>
+
+      <g class="fig-all" mask="url(#figFade)">
         <!-- No hue, only tone, so she holds her own beside a
              black-and-white photograph. Light from the left: every form
-             gets a lit side and a shadow side.
-
-             The pose is upright and composed - knees together, hands
-             resting in the lap. Splayed knees with the hands hanging
-             between them is the reference's pose, and on her it read as
-             a slouch rather than as sitting. -->
-
-        <ellipse cx="100" cy="348" rx="62" ry="7" fill="#1A1C20" opacity=".08"/>
-
-        <!-- the stool first, so she sits in front of it -->
-        <g>
-          <path d="M60 216 L44 340" stroke="#7C7F86" stroke-width="7" stroke-linecap="round"/>
-          <path d="M140 216 L156 340" stroke="#6C6F76" stroke-width="7" stroke-linecap="round"/>
-          <path d="M50 296 L150 296" stroke="#73767D" stroke-width="5" stroke-linecap="round"/>
-          <rect x="38" y="200" width="124" height="16" rx="6" fill="#6E7178"/>
-          <rect x="38" y="200" width="124" height="6" rx="3" fill="#8D9097"/>
-        </g>
-
-        <!-- far leg, then the hips, then the near leg: that overlap is
-             most of what makes a seated figure read as seated -->
-        <g>
-          <path d="M108 196 L116 250" stroke="#303238" stroke-width="30" stroke-linecap="round"/>
-          <path d="M116 250 L119 334" stroke="#303238" stroke-width="21" stroke-linecap="round"/>
-          <path d="M119 338 Q134 340 136 348 Q127 352 110 349 Z" fill="#1D1F23"/>
-        </g>
+             gets a lit side and a shadow side. -->
 
         <g class="fig-breath">
-          <!-- trousers over the seat -->
-          <path d="M70 176 Q100 184 130 176 L137 206 Q100 216 63 206 Z" fill="#35373D"/>
-          <path d="M100 178 L137 206 Q119 212 100 213 Z" fill="#000" opacity=".16"/>
+          <path d="M70 176 Q100 184 130 176 L141 240 L59 240 Z" fill="#35373D"/>
+          <path d="M100 178 L141 240 L100 240 Z" fill="#000" opacity=".16"/>
 
           <!-- the sweater has a waist; without one it hangs like a sack -->
           <path d="M66 106 Q100 96 134 106 L126 160 L131 188 Q100 197 69 188 L74 160 Z" fill="#9A9DA4"/>
@@ -424,12 +412,6 @@ body.on-blue .topbar{background:var(--blue)}
           <path d="M66 106 Q100 117 134 106 L132 120 Q100 129 68 120 Z" fill="#000" opacity=".1"/>
           <path d="M69 186 Q100 195 131 186 L131 190 Q100 199 69 190 Z" fill="#000" opacity=".13"/>
           <path d="M87 99 Q100 110 113 99 L109 96 Q100 103 91 96 Z" fill="#7F828A"/>
-        </g>
-
-        <g>
-          <path d="M92 196 L84 250" stroke="#3B3D43" stroke-width="30" stroke-linecap="round"/>
-          <path d="M84 250 L81 334" stroke="#3B3D43" stroke-width="21" stroke-linecap="round"/>
-          <path d="M81 338 Q66 340 64 348 Q73 352 90 349 Z" fill="#1D1F23"/>
         </g>
 
         <!-- arms by her sides, forearms coming in to hands folded in
