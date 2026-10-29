@@ -306,6 +306,14 @@ body.on-blue .topbar{background:var(--blue)}
 .role p{margin-top:14px;font-size:14.5px;line-height:1.8;color:var(--ink-soft);max-width:70ch}
 .role .mono{color:var(--ink-soft);line-height:1.8}
 
+/* ---- SERVICES: experience rows, with a link to order ---- */
+.offer{padding-top:0}
+.offer-lede{font-size:14.5px;line-height:1.8;color:var(--ink-soft);max-width:60ch;margin-bottom:clamp(20px,3vw,36px)}
+.offer-link{display:inline-block;margin-top:16px;color:var(--blue);text-decoration:none;
+  border-bottom:1px solid currentColor;padding-bottom:2px}
+.offer-link:hover{color:var(--blue-d)}
+.offer-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
 /* ---- STACK ---- */
 .stack{padding:clamp(50px,8vh,100px) 0 clamp(80px,12vh,150px)}
 .stackgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.6vw,38px);
@@ -688,6 +696,58 @@ body.on-blue .topbar{background:var(--blue)}
   </div>
 </section>
 
+<section class="xp offer" id="services">
+  <div class="wrap">
+    <p class="brk rv" style="margin-bottom:clamp(12px,1.6vw,20px)"><i>[</i> Services <i>]</i></p>
+    <p class="offer-lede rv">Fixed price, fixed scope. Order directly on Upwork, with payment held safely until you approve the work.</p>
+
+    <article class="role">
+      <span class="mono rv">From $45 &middot; 24 hours</span>
+      <div class="rv">
+        <h3>Fix your broken Next.js or React build<br><span class="org">Broken build fix</span></h3>
+        <p>Deploy failing on Vercel, CI or locally? I find the real cause, fix it on a separate branch, and explain what was wrong in plain English. Diagnosis-only option if you just need to know why.</p>
+        <a class="offer-link mono" href="https://www.upwork.com/services/product/development-it-your-broken-next-js-or-react-build-error-fixed-in-24-hours-2108561047487335836" target="_blank" rel="noopener noreferrer">View &amp; order on Upwork &rarr;</a>
+      </div>
+    </article>
+
+    <article class="role">
+      <span class="mono rv">From $85 &middot; 2&ndash;7 days</span>
+      <div class="rv">
+        <h3>Upgrade to Next.js 16 and React 19<br><span class="org">Version upgrade</span></h3>
+        <p>Async params, React 19 API changes, Zod v4 and the library upgrades that come with them, until the production build compiles clean. The same kind of failure I cleared at Scale Up Brands.</p>
+        <a class="offer-link mono" href="https://www.upwork.com/services/product/development-it-your-next-js-app-upgraded-to-next-js-16-and-react-19-with-a-clean-build-2108555937825974445" target="_blank" rel="noopener noreferrer">View &amp; order on Upwork &rarr;</a>
+      </div>
+    </article>
+
+    <article class="role">
+      <span class="mono rv">From $90 &middot; 2&ndash;10 days</span>
+      <div class="rv">
+        <h3>Modern Angular development and bug fixes<br><span class="org">Angular</span></h3>
+        <p>Standalone components, signals, reactive forms and typed services, written inside your existing codebase and its conventions.</p>
+        <a class="offer-link mono" href="https://www.upwork.com/services/product/development-it-modern-angular-development-and-bug-fixes-with-standalone-components-2108564569490541980" target="_blank" rel="noopener noreferrer">View &amp; order on Upwork &rarr;</a>
+      </div>
+    </article>
+
+    <article class="role">
+      <span class="mono rv">From $75 &middot; 2&ndash;8 days</span>
+      <div class="rv">
+        <h3>Prisma and PostgreSQL schema design<br><span class="org">Database</span></h3>
+        <p>Models, relations and indexes that match how your business works, with migrations tested on a copy first and a seed script to start from.</p>
+        <a class="offer-link mono" href="https://www.upwork.com/services/product/development-it-a-prisma-and-postgresql-database-schema-with-safe-migrations-2108568870299972601" target="_blank" rel="noopener noreferrer">View &amp; order on Upwork &rarr;</a>
+      </div>
+    </article>
+
+    <article class="role">
+      <span class="mono rv">From $60 &middot; 2&ndash;6 days</span>
+      <div class="rv">
+        <h3>JSON-LD structured data for Next.js<br><span class="org">Search</span></h3>
+        <p>Typed, server-rendered schema.org markup so Google and AI search tools can read your pages, validated in the Rich Results Test.</p>
+        <a class="offer-link mono" href="https://www.upwork.com/services/product/marketing-json-ld-structured-data-on-your-next-js-site-for-google-and-ai-search-2108570410855248889" target="_blank" rel="noopener noreferrer">View &amp; order on Upwork &rarr;</a>
+      </div>
+    </article>
+  </div>
+</section>
+
 <section class="stack">
   <div class="wrap">
     <p class="brk rv"><i>[</i> Stack <i>]</i></p>
@@ -712,6 +772,7 @@ body.on-blue .topbar{background:var(--blue)}
       <h4><i style="font-style:normal;font-weight:200;opacity:.75">[</i> Nav <i style="font-style:normal;font-weight:200;opacity:.75">]</i></h4>
       <a href="#top">Home</a>
       <a href="#work">Projects</a>
+      <a href="#services">Services</a>
       <a href="#contact">Contact</a>
     </div>
     <div>
